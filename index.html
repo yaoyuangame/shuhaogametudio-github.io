@@ -4,240 +4,298 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShuHao Game Studio</title>
-    <meta name="description" content="ShuHao Game Studio - Indie Game Development">
     <style>
+        /* 1. 基础设置 */
         :root {
-            --bg-color: #0a0a0a;       /* 纯黑背景 */
-            --terminal-green: #00ff41; /* 经典终端绿 */
-            --terminal-dim: #008f11;   /* 暗绿色 */
-            --text-white: #e0e0e0;     /* 普通文本白 */
-            --alert: #ff3333;          /* 警告红 */
-            --font-stack: 'Courier New', Courier, monospace;
+            --primary-color: #2563eb; /* 科技蓝 */
+            --text-dark: #1f2937;     /* 深灰文字 */
+            --text-light: #6b7280;    /* 浅灰文字 */
+            --bg-color: #f9fafb;      /* 极浅的灰白背景 */
+            --white: #ffffff;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-white);
-            font-family: var(--font-stack);
-            font-size: 15px;
+            color: var(--text-dark);
             line-height: 1.6;
-            padding: 20px;
-            overflow-x: hidden;
         }
 
-        .terminal-window {
-            max-width: 800px;
-            margin: 20px auto;
-            border: 2px solid var(--terminal-dim);
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
-            min-height: 90vh;
-        }
-
-        /* 顶部栏 */
-        .header-bar {
-            border-bottom: 1px dashed var(--terminal-dim);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+        /* 2. 导航栏 */
+        nav {
+            background: var(--white);
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .title {
-            color: var(--terminal-green);
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: var(--terminal-green);
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
+        .logo span {
+            color: var(--primary-color);
         }
 
-        /* 命令行提示符 */
-        .prompt {
-            color: var(--terminal-green);
-            margin-right: 10px;
+        /* 3. Hero 区域 (首屏) */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
         }
 
-        /* 章节通用 */
-        .section {
-            margin-bottom: 50px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: var(--terminal-green);
-            margin-bottom: 15px;
-            background: rgba(0, 255, 65, 0.1);
-            padding: 5px 10px;
-            display: inline-block;
-        }
-
-        /* 列表与项目 */
-        .data-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .data-item {
+        .hero h1 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            border-left: 2px solid var(--terminal-dim);
-            padding-left: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        .project-name {
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1rem;
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
         }
 
-        .status-badge {
-            font-size: 0.8rem;
-            background: var(--terminal-dim);
-            color: #000;
-            padding: 2px 6px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        /* 链接 */
-        a {
-            color: var(--terminal-green);
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            border-bottom: 1px dotted var(--terminal-green);
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
         }
 
-        a:hover {
-            background-color: var(--terminal-green);
-            color: #000;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(37, 99, 235, 0.3);
         }
 
-        /* 底部 */
-        footer {
-            margin-top: 50px;
-            border-top: 1px dashed var(--terminal-dim);
-            padding-top: 15px;
-            font-size: 12px;
-            color: var(--terminal-dim);
+        /* 4. 通用容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        /* 5. 项目展示 (卡片布局) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        /* 模拟图片区域 */
+        .card-image {
+            height: 180px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6); /* 蓝紫渐变 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .card-image.secondary {
+            background: linear-gradient(45deg, #10b981, #3b82f6); /* 绿蓝渐变 */
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* 6. 关于我们 */
+        .about-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 60px;
             text-align: center;
         }
 
-        /* 动画 */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        /* 7. 联系方式 */
+        .contact-section {
+            text-align: center;
+            padding: 100px 20px;
         }
 
-        /* 移动端适配 */
-        @media (max-width: 600px) {
-            .terminal-window { border: none; padding: 0; box-shadow: none; }
-            .title { font-size: 1.4rem; }
+        .email-link {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            transition: color 0.2s;
+        }
+
+        .email-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* 8. 底部 */
+        footer {
+            background: #f3f4f6;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* 手机适配 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="terminal-window">
-        <!-- 头部 -->
-        <div class="header-bar">
-            <div class="title">SHUHAO GAME STUDIO<span class="cursor"></span></div>
-            <div style="font-size: 12px; color: var(--terminal-dim); margin-top: 10px;">
-                KERNEL: v2.4.0-stable<br>
-                STATUS: ONLINE
-            </div>
+    <!-- 导航 -->
+    <nav>
+        <div class="logo">ShuHao<span>.Studio</span></div>
+        <div style="font-size: 0.9rem; font-weight: 600;">Est. 2024</div>
+    </nav>
+
+    <!-- 首屏 Hero -->
+    <header class="hero">
+        <h1>Crafting Worlds, <br>One Pixel at a Time.</h1>
+        <p>We are ShuHao Game Studio. An independent team dedicated to creating immersive mobile and PC gaming experiences.</p>
+        <a href="#projects" class="btn">View Our Games</a>
+    </header>
+
+    <!-- 项目展示 -->
+    <div id="projects" class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        
+      <div class="projects-grid">
+            <!-- 项目 A：Aether Chronicles -->
+            <article class="card">
+                <!-- 这里的渐变色我换成了深邃的紫色和蓝色，配合幻想主题 -->
+                <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    AETHER
+                </div>
+                <div class="card-content">
+                    <h3>Aether Chronicles</h3>
+                    <p>A fantasy RPG exploring a world of floating islands and ancient magic. Restore the balance of elements.</p>
+                    <span class="tag">Adventure</span>
+                    <span class="tag">RPG</span>
+                </div>
+            </article>
+
+            <!-- 项目 B：Neon Blitz -->
+            <article class="card">
+                <!-- 这里的渐变色用了高饱和度的粉红和橙色，配合霓虹主题 -->
+                <div class="card-image" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">
+                    NEON
+                </div>
+                <div class="card-content">
+                    <h3>Neon Blitz</h3>
+                    <p>Fast-paced arcade action set in a cyberpunk city. Master the rhythm and climb the leaderboards.</p>
+                    <span class="tag">Arcade</span>
+                    <span class="tag">Action</span>
+                </div>
+            </article>
+
+            <!-- 项目 C：未公开项目 (保持神秘感) -->
+            <article class="card">
+                <div class="card-image" style="background: linear-gradient(45deg, #434343 0%, #000000 100%); color: #888;">
+                    ???
+                </div>
+                <div class="card-content">
+                    <h3>Project: Horizon</h3>
+                    <p>An unannounced multiplayer experiment. Currently in early prototyping stage.</p>
+                    <span class="tag">R&D</span>
+                    <span class="tag">Multiplayer</span>
+                </div>
+            </article>
         </div>
-
-        <!-- 简介 -->
-        <div class="section">
-            <p><span class="prompt">root@shuhao:~#</span> ./run_intro.sh</p>
-            <br>
-            <p>
-                Initializing ShuHao Studio Protocols... Done.<br>
-                Loading Creative Modules... Done.
-            </p>
-            <br>
-            <p style="text-align: justify;">
-                We are <strong>ShuHao Game Studio</strong>. An independent game development entity focused on creating high-fidelity interactive entertainment. We combine retro aesthetics with modern gameplay mechanics to deliver unique digital experiences.
-            </p>
-        </div>
-
-        <!-- 项目展示 -->
-        <div class="section">
-            <p><span class="prompt">root@shuhao:~#</span> cat /var/www/projects.txt</p>
-            <br>
-            <h2>>> CURRENT PROJECTS</h2>
-            
-            <ul class="data-list">
-                <li class="data-item">
-                    <div class="project-name">
-                        [ PROJECT: ECHO ] <span class="status-badge">RELEASED</span>
-                    </div>
-                    <p style="color: #bbb; font-size: 0.9rem; margin-top: 5px;">
-                        A mobile puzzle adventure game exploring themes of sound and memory. Available on iOS and Android platforms.
-                    </p>
-                </li>
-
-                <li class="data-item">
-                    <div class="project-name">
-                        [ PROJECT: TITAN ] <span class="status-badge" style="background: var(--alert); color: #fff;">IN DEVELOPMENT</span>
-                    </div>
-                    <p style="color: #bbb; font-size: 0.9rem; margin-top: 5px;">
-                        Our upcoming flagship title. A roguelike strategy game set in a dystopian future. Currently in Alpha testing phase.
-                    </p>
-                </li>
-            </ul>
-        </div>
-
-        <!-- 技术栈 -->
-        <div class="section">
-            <p><span class="prompt">root@shuhao:~#</span> sys_info --tech-stack</p>
-            <br>
-            <h2>>> SYSTEM SPECS</h2>
-            <p>
-                > <strong>Engine:</strong> Unity 2022 LTS / Unreal Engine 5<br>
-                > <strong>Code:</strong> C# / C++ / Python<br>
-                > <strong>Art:</strong> Blender / Photoshop / Aseprite<br>
-                > <strong>Target:</strong> Mobile / PC / Console
-            </p>
-        </div>
-
-        <!-- 联系方式 -->
-        <div class="section">
-            <p><span class="prompt">root@shuhao:~#</span> connect --secure</p>
-            <br>
-            <h2>>> COMMUNICATION UPLINK</h2>
-            <p>
-                For business inquiries, publishing opportunities, or press kits, please establish a connection via the secure channel below:
-            </p>
-            <br>
-            <p>
-                [ EMAIL ] :: <a href="mailto:Chris.Andrewsupt@icloud.com">Chris.Andrewsupt@icloud.com</a>
-            </p>
-            <p style="color: var(--terminal-dim); font-size: 12px; margin-top: 10px;">
-                * Encryption Key: PUBLIC_PGP_Verified
-            </p>
-        </div>
-
-        <!-- 底部 -->
-        <footer>
-            &copy; 2024 ShuHao Game Studio. All systems nominal.<br>
-            Terminating session...
-        </footer>
     </div>
+
+    <!-- 关于我们 -->
+    <div class="container">
+        <div class="about-section">
+            <h2 class="section-title">Our Philosophy</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--text-light);">
+                At ShuHao Game Studio, we believe that games are more than just entertainment—they are a medium for art and connection. We strive to build games that respect the player's time, offering polished mechanics and engaging narratives without the clutter.
+            </p>
+        </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="contact-section">
+        <h2 class="section-title">Let's Create Together</h2>
+        <p style="margin-bottom: 30px; color: var(--text-light);">
+            Interested in publishing, investment, or just want to say hi?
+        </p>
+        <a href="mailto:Chris.Andrewsupt@icloud.com" class="email-link">
+            Chris.Andrewsupt@icloud.com
+        </a>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        &copy; 2024 ShuHao Game Studio. All rights reserved.
+    </footer>
 
 </body>
 </html>
