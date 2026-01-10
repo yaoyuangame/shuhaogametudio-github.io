@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShuHao Game Studio</title>
+    <meta name="description" content="ShuHao Game Studio - Indie Game Development">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;       /* 纯黑背景 */
+            --terminal-green: #00ff41; /* 经典终端绿 */
+            --terminal-dim: #008f11;   /* 暗绿色 */
+            --text-white: #e0e0e0;     /* 普通文本白 */
+            --alert: #ff3333;          /* 警告红 */
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            font-family: var(--font-stack);
+            font-size: 15px;
+            line-height: 1.6;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .terminal-window {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid var(--terminal-dim);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+            min-height: 90vh;
+        }
+
+        /* 顶部栏 */
+        .header-bar {
+            border-bottom: 1px dashed var(--terminal-dim);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .title {
+            color: var(--terminal-green);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--terminal-green);
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        /* 命令行提示符 */
+        .prompt {
+            color: var(--terminal-green);
+            margin-right: 10px;
+        }
+
+        /* 章节通用 */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--terminal-green);
+            margin-bottom: 15px;
+            background: rgba(0, 255, 65, 0.1);
+            padding: 5px 10px;
+            display: inline-block;
+        }
+
+        /* 列表与项目 */
+        .data-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .data-item {
+            margin-bottom: 20px;
+            border-left: 2px solid var(--terminal-dim);
+            padding-left: 15px;
+        }
+
+        .project-name {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            background: var(--terminal-dim);
+            color: #000;
+            padding: 2px 6px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* 链接 */
+        a {
+            color: var(--terminal-green);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--terminal-green);
+            transition: all 0.3s;
+        }
+
+        a:hover {
+            background-color: var(--terminal-green);
+            color: #000;
+        }
+
+        /* 底部 */
+        footer {
+            margin-top: 50px;
+            border-top: 1px dashed var(--terminal-dim);
+            padding-top: 15px;
+            font-size: 12px;
+            color: var(--terminal-dim);
+            text-align: center;
+        }
+
+        /* 动画 */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            .terminal-window { border: none; padding: 0; box-shadow: none; }
+            .title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-window">
+        <!-- 头部 -->
+        <div class="header-bar">
+            <div class="title">SHUHAO GAME STUDIO<span class="cursor"></span></div>
+            <div style="font-size: 12px; color: var(--terminal-dim); margin-top: 10px;">
+                KERNEL: v2.4.0-stable<br>
+                STATUS: ONLINE
+            </div>
+        </div>
+
+        <!-- 简介 -->
+        <div class="section">
+            <p><span class="prompt">root@shuhao:~#</span> ./run_intro.sh</p>
+            <br>
+            <p>
+                Initializing ShuHao Studio Protocols... Done.<br>
+                Loading Creative Modules... Done.
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                We are <strong>ShuHao Game Studio</strong>. An independent game development entity focused on creating high-fidelity interactive entertainment. We combine retro aesthetics with modern gameplay mechanics to deliver unique digital experiences.
+            </p>
+        </div>
+
+        <!-- 项目展示 -->
+        <div class="section">
+            <p><span class="prompt">root@shuhao:~#</span> cat /var/www/projects.txt</p>
+            <br>
+            <h2>>> CURRENT PROJECTS</h2>
+            
+            <ul class="data-list">
+                <li class="data-item">
+                    <div class="project-name">
+                        [ PROJECT: ECHO ] <span class="status-badge">RELEASED</span>
+                    </div>
+                    <p style="color: #bbb; font-size: 0.9rem; margin-top: 5px;">
+                        A mobile puzzle adventure game exploring themes of sound and memory. Available on iOS and Android platforms.
+                    </p>
+                </li>
+
+                <li class="data-item">
+                    <div class="project-name">
+                        [ PROJECT: TITAN ] <span class="status-badge" style="background: var(--alert); color: #fff;">IN DEVELOPMENT</span>
+                    </div>
+                    <p style="color: #bbb; font-size: 0.9rem; margin-top: 5px;">
+                        Our upcoming flagship title. A roguelike strategy game set in a dystopian future. Currently in Alpha testing phase.
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 技术栈 -->
+        <div class="section">
+            <p><span class="prompt">root@shuhao:~#</span> sys_info --tech-stack</p>
+            <br>
+            <h2>>> SYSTEM SPECS</h2>
+            <p>
+                > <strong>Engine:</strong> Unity 2022 LTS / Unreal Engine 5<br>
+                > <strong>Code:</strong> C# / C++ / Python<br>
+                > <strong>Art:</strong> Blender / Photoshop / Aseprite<br>
+                > <strong>Target:</strong> Mobile / PC / Console
+            </p>
+        </div>
+
+        <!-- 联系方式 -->
+        <div class="section">
+            <p><span class="prompt">root@shuhao:~#</span> connect --secure</p>
+            <br>
+            <h2>>> COMMUNICATION UPLINK</h2>
+            <p>
+                For business inquiries, publishing opportunities, or press kits, please establish a connection via the secure channel below:
+            </p>
+            <br>
+            <p>
+                [ EMAIL ] :: <a href="mailto:Chris.Andrewsupt@icloud.com">Chris.Andrewsupt@icloud.com</a>
+            </p>
+            <p style="color: var(--terminal-dim); font-size: 12px; margin-top: 10px;">
+                * Encryption Key: PUBLIC_PGP_Verified
+            </p>
+        </div>
+
+        <!-- 底部 -->
+        <footer>
+            &copy; 2024 ShuHao Game Studio. All systems nominal.<br>
+            Terminating session...
+        </footer>
+    </div>
+
+</body>
+</html>
